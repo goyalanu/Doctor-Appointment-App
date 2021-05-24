@@ -1,0 +1,34 @@
+<template>
+<lightning-combobox
+            name="Availability"
+            label="Availability"
+            value={value}
+            placeholder="Select Availability"
+            options={availabilityOptions}
+            onchange={handleChange} >
+</lightning-combobox>
+<lightning-combobox
+            name="All Filters"
+            label="Charges"
+            value={values}
+            placeholder="Select Fee"
+            options={allFilterOptions}
+            onchange={handleChange} >
+</lightning-combobox>
+<lightning-combobox
+            name="Sorted By"
+            label="Sorted By"
+            value={values}
+            placeholder="Select Fee"
+            options={sortedOptions}
+            onchange={handleChange} >
+</lightning-combobox>
+<lightning-combobox
+            name="gender"
+            label="Gender"
+            value={values}
+            placeholder="Select Fee"
+            options={enderOptions}
+            onchange={handleChange} >
+</lightning-combobox>
+</template>
