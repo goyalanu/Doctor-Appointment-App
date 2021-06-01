@@ -1,0 +1,59 @@
+<template>
+<!-- Body -->
+<div class="body-container">
+    <div class="body">
+        <template  if:true={Addressvalues.data}>
+            <template if:true={Specializationvalues.data}>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <p class="body-text">select location</p>
+                        <lightning-combobox name="location"  value={selectedAddress} options={Addressvalues.data.values} onchange={handleChange}></lightning-combobox>
+                    </div>
+                    <div class="slds-col">
+                        <p class="body-text">Select doctors</p>
+                        <lightning-combobox name="specialisation" value={selectedSpecialisation} placeholder="Search for doctors" options={Specializationvalues.data.values} onchange={handlespecializationChange}></lightning-combobox>
+                    </div>
+                    <lightning-button variant="brand" label="Book Appointment" title="Book Appointment" onclick={openModal} class="slds-align_absolute-center"></lightning-button>
+                </div>
+            </template>
+        </template>
+    </div>
+</div>
+<template if:true={isModalOpen}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <lightning-card title="Book Your Appontment">
+                <lightning-record-edit-form object-api-name={objectApiName} onsubmit={handleSubmit} onsuccess={handleSuccess} >
+                    <div class="slds-box slds-m-around_medium" style="background-color: lightgrey;">
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Doctor__c"></lightning-input-field>
+                        <lightning-input-field field-name="Date__c"></lightning-input-field>
+                        <lightning-input type="time" label="time" onchange={handletime} ></lightning-input>
+                        <lightning-button  class="slds-align_absolute-center" label="book your Appointment"  type="submit"></lightning-button>
+                    </div>
+                </lightning-record-edit-form>
+        </lightning-card>
+        <footer class="slds-modal__footer">
+            <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+            <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+        </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+
+
+
+
+<!-- Footer-1 -->
+
+<div class="slds-p-around_x-large lgc-bg">
+    <lightning-button label="Our Hospitals" icon-name="utility:company" title="Non-primary action" onclick={handleClicks} class="slds-m-left_x-large slds-m-right_x-large square-icon-medium-boundary-alt"></lightning-button>
+    <lightning-button label="Find Provider" icon-name="utility:groups" title="Non-primary action" onclick={handleClicks} class="slds-m-left_x-large slds-m-right_x-large"></lightning-button>
+    <lightning-button label="My Centeral Health" icon-name="utility:asset_warranty" title="Non-primary action" onclick={handleClicks} class="slds-m-left_x-large slds-m-right_x-large"></lightning-button>
+    <lightning-button label="Pay Bills Online" icon-name="utility:moneybag" title="Non-primary action" onclick={handleClicks} class="slds-m-left_x-large slds-m-right_x-large"></lightning-button>
+    <lightning-button label="Carrer" icon-name="utility:high_velocity_sales" title="Non-primary action" onclick={handleClicks} class="slds-m-left_x-large slds-m-right_x-large"></lightning-button>
+    <lightning-button label="Give a Gift " icon-name="utility:password" title="Non-primary action" onclick={handleClicks} class="slds-m-left_x-large slds-m-right_x-large"></lightning-button>
+
+</div>
+</template>

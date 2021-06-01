@@ -1,0 +1,27 @@
+/* ...........header................ */
+.logo{
+    max-width: 75px;
+    max-height: 75px;
+    float: left;
+    margin-top: -20px;
+}
+.lgc-bg {
+    background-color: rgb(255, 254, 254);
+    padding: 30px;
+    text-align: center;
+}
+.body{
+    background-color: rgb(255, 254, 254);
+}
+.footer2{
+    margin-right: 50px ;
+    margin-bottom: 100px;
+    float: right;
+
+}
+.logo2{
+    max-width: 50px;
+    max-height: 50px;
+    float: left;
+    margin-top: -20px;
+}

@@ -1,0 +1,33 @@
+<template>
+    <lightning-button variant="brand"
+       label="Sign up"
+       title="Sign up"
+       onclick={openModal}
+       class="slds-align_absolute-center">
+    </lightning-button>
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <lightning-card title="Signup">
+                    <lightning-record-edit-form object-api-name={objectApiName} onsubmit={handleSubmit}
+                    onsuccess={handleSuccess} >
+                       <div class="slds-box slds-m-around_medium" style="background-color: lightgrey;">
+                            <lightning-input-field field-name="Name"></lightning-input-field>
+                            <lightning-input-field field-name="Last Name"></lightning-input-field>
+                            <lightning-input-field field-name="Email"></lightning-input-field>
+                            <lightning-input-field field-name="Phone"></lightning-input-field>
+                            <lightning-input-field field-name="Company"></lightning-input-field>
+                            
+                         <lightning-button  class="slds-align_absolute-center" label="Signup"  type="submit"></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+           </lightning-card>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+            </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+ </template>

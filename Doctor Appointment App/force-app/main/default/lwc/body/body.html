@@ -1,0 +1,94 @@
+<template>
+    <lightning-card title="Appointment booking" >
+        <div class="slds-m-around_small slds-box myOwnCard">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                  <template if:true={values.data}>
+                              <lightning-combobox 
+                                  name="gender" 
+                                  label ="select gender" 
+                                  value={ge} 
+                                  options={values.data.values} v
+                                  onchange={handleGenderChange}>
+                              </lightning-combobox>
+                          </template>
+                </div>
+                <div class="slds-col">
+                 <lightning-input type="time" label="Select time" onchange={handletimeChange} ></lightning-input>
+                </div>
+                <div class="slds-col">
+                  <lightning-input type="date" label="Select date" onchange={handledateChange} ></lightning-input>
+                </div>
+              </div>
+                <template if:true={Addressvalues.data}>
+                <template if:true={Specializationvalues.data}>
+                <div class="slds-grid slds-gutters">
+                        <div class="slds-col">
+                          <lightning-combobox 
+                            name="location" 
+                            label ="Select Location" 
+                            options={Addressvalues.data.values} 
+                            onchange={handleChange}>
+                        </lightning-combobox>
+                        </div>
+                        <div class="slds-col">
+                          <lightning-combobox name="specialisation" 
+                            label="Select doctors " 
+                            placeholder="Search for doctors"
+                            options={Specializationvalues.data.values} 
+                            onchange={handlespecializationChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                </template>
+            </template>
+            <template style="margin-top:50px;" if:true={doctor.data}>
+                <template for:each={doctor.data} for:item="d">
+                    <div key={d.Id}>
+                        <p style="text-color:rgb(22, 11, 119);"><b>{d.Name}</b></p>
+                        <img style="float:right; max-height: 130px; margin-right:20px; " src={d.image__c} ></img>
+                    
+                      
+                        <p > {d.Specialization__c}</p>
+                        <p> {d.Experince__c}  Years of Experience :</p>
+                        <p>{d.Consultation_fee__c} consoltant fee</p>
+                        <p>Address : {d.Address__c}</p>
+                        <p>Doctor_email : {d.Email__c}</p>
+                      
+                        <lightning-button variant="brand"
+                            label="Book Appointment"
+                            title="Book Appointment"
+                            data-key={d.Id}
+                            onclick={openModal}
+                            class="slds-align_absolute-center">
+                            </lightning-button>
+                           </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card> 
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <lightning-card title="Book Your Appontment">
+                    <lightning-record-edit-form object-api-name={objectApiName} onsubmit={handleSubmit}
+                    onsuccess={handleSuccess} >
+                    <div class="slds-box slds-m-around_medium" style="background-color: lightgrey;">
+                            <lightning-input-field field-name="Name"></lightning-input-field>
+                            <lightning-input-field field-name="Doctor__c" value={doc}></lightning-input-field>
+                            <lightning-input-field field-name="Email__c"></lightning-input-field>
+                            <lightning-input type="time" label="time" onchange={handletimeChange} value={t}></lightning-input>
+                            <lightning-input type="date" label="date" onchange={handledateChange} value={dt}></lightning-input>
+                        <lightning-button  class="slds-align_absolute-center" label="book your Appointment"  type="submit"></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+        </lightning-card>
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+            </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template> 
+</template>
